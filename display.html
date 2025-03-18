@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Papers</title>
+    <link rel="stylesheet" href="displaystyles.css">
+</head>
+<body>
+    <header>
+        <h2 style="color: white;">Question Papers</h2>
+        <div class="button-group">
+            <button class="upload-btn">Upload Paper</button>
+            <button class="logout-btn">Logout</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1>📄 Question Papers</h1>
+
+        <div class="search-section">
+            <input type="text" id="coursecode" placeholder="Enter Course Id">
+            <select id="difficultyLevel">
+                <option value="">Select Difficulty</option>
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Difficult">Difficult</option>
+            </select>
+            <input type="text" id="year" placeholder="Enter Year">
+            <button class="search-btn" onclick="searchPapers()">🔍</button>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Subject Code</th>
+                    <th>Year</th>
+                    <th>Difficulty</th>
+                    <th>Tags</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="paperList">
+                <!-- Data will be dynamically added here -->
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // Sample Question Papers Data
+        const papers = [
+            { title: "AI3", subject: "CS101", year: "2022", difficulty: "Medium", tags: ["Repeated: Answer all Questions"] },
+            { title: "AI3", subject: "CS101", year: "2021", difficulty: "Easy", tags: ["Important: Covers key concepts"] }
+        ];
+
+        function displayPapers(filteredPapers = papers) {
+            const tableBody = document.getElementById("paperList");
+            tableBody.innerHTML = "";
+
+            filteredPapers.forEach(paper => {
+                let difficultyClass = paper.difficulty.toLowerCase();
+                let tagsHTML = paper.tags.map(tag => `<span class="tags">${tag}</span>`).join(" ");
+
+                tableBody.innerHTML += `
+                    <tr>
+                        <td>${paper.title}</td>
+                        <td>${paper.subject}</td>
+                        <td>${paper.year}</td>
+                        <td><span class="difficulty ${difficultyClass}">${paper.difficulty}</span></td>
+                        <td>${tagsHTML}</td>
+                        <td class="actions">
+                            <button class="view-btn">👁 View</button>
+                            <button class="download-btn">⬇ Download</button>
+                            <button class="print-btn">🖨 Print</button>
+                        </td>
+                    </tr>
+                `;
+            });
+        }
+
+        function searchPapers() {
+            const subjectCode = document.getElementById("subjectCode").value;
+            const difficultyLevel = document.getElementById("difficultyLevel").value;
+            const year = document.getElementById("year").value;
+
+            let filteredPapers = papers.filter(paper => {
+                return (!subjectCode || paper.subject === subjectCode) &&
+                       (!difficultyLevel || paper.difficulty === difficultyLevel) &&
+                       (!year || paper.year === year);
+            });
+
+            displayPapers(filteredPapers);
+        }
+        displayPapers();
+    </script>
+
+</body>
+</html>

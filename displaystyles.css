@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+}
+body {
+    background-color: #f4f4f4;
+    padding: 20px;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #222;
+    padding: 15px;
+}
+.button-group {
+    display: flex;
+    gap: 10px;
+}
+header button {
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+    border-radius: 5px;
+}
+.upload-btn {
+    background: blue;
+}
+.logout-btn {
+    background: red;
+}
+.container {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-top: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+.search-section {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+select, input {
+    padding: 8px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+button.search-btn {
+    padding: 8px 15px;
+    background: blue;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+}
+table, th, td {
+    border: 1px solid #ddd;
+    text-align: left;
+    padding: 10px;
+}
+th {
+    background: black;
+    color: white;
+}
+.difficulty {
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+.difficulty.easy {
+    background: green;
+}
+.difficulty.medium {
+    background: orange;
+}
+.difficulty.difficult {
+    background: red;
+}
+.tags {
+    color: white;
+    background: red;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    display: inline-block;
+    margin: 2px;
+}
+.actions button {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    margin: 2px;
+    color: white;
+    border-radius: 5px;
+}
+.view-btn {
+    background: blue;
+}
+.download-btn {
+    background: green;
+}
+.print-btn {
+    background: orange;
+}
