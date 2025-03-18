@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Paper Management System</title>
+    <link rel="stylesheet" href="homestyles.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-title">📄 Question Paper Management System</div>
+        <div class="nav-buttons">
+            <button class="login-btn" onclick="redirectTo('login.html')">Login</button>
+            <button class="register-btn" onclick="redirectTo('register.html')">Register</button>
+            <button class="upload-btn" onclick="redirectTo('upload.html')">Upload Paper</button>
+        </div>
+    </nav>
+    <h1>Welcome to the Question Paper Management System</h1>
+    <div class="main-section">
+        <div class="image-container">
+            <img src="online-library-digital-repository-virtual.webp" alt="Digital Repository">
+        </div>
+        <div class="content">
+            
+            <p>
+                Our platform helps students easily find and manage previous years' question papers.
+                It enables quick searching by <b>subject code, year, and difficulty level.</b>  
+                Students can also upload question papers to share knowledge with others.
+            </p>
+        </div>
+    </div>
+
+    <script>
+        function redirectTo(page) {
+            window.location.href = page;
+        }
+    </script>
+
+</body>
+</html>
