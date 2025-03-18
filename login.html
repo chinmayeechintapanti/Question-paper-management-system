@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="loginstyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <script>
+        let attempts = 0;
+        const maxAttempts = 3;
+        const lockoutTime = 30000; // 30 seconds
+
+        function validateLogin(event) {
+            event.preventDefault();
+
+            let username = document.getElementById("username").value;
+            let password = document.getElementById("password").value;
+            let rememberMe = document.getElementById("remember-me").checked;
+
+            // Required fields validation
+            if (username.trim() === "" || password.trim() === "") {
+                alert("Username and Password cannot be empty!");
+                return false;
+            }
+
+            // Password validation: At least 8 characters, must contain letters and numbers
+            let passwordPattern = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/;
+            if (!passwordPattern.test(password)) {
+                alert("Password must be at least 8 characters long and contain both letters and numbers.");
+                return false;
+            }
+
+            // Brute-force protection (limit attempts)
+            if (attempts >= maxAttempts) {
+                alert("Too many failed attempts! Try again later.");
+                return false;
+            }
+
+            // Simulated login check (Replace with actual authentication)
+            if (username !== "admin" || password !== "Admin123") { // Replace with real credentials validation
+                attempts++;
+                if (attempts >= maxAttempts) {
+                    alert("Too many failed attempts! Locking login for 30 seconds.");
+                    document.getElementById("login-btn").disabled = true;
+                    setTimeout(() => {
+                        document.getElementById("login-btn").disabled = false;
+                        attempts = 0;
+                    }, lockoutTime);
+                } else {
+                    alert(`Incorrect credentials! Attempts left: ${maxAttempts - attempts}`);
+                }
+                return false;
+            }
+
+            // Remember Me (store username in localStorage)
+            if (rememberMe) {
+                localStorage.setItem("savedUser", username);
+            } else {
+                localStorage.removeItem("savedUser");
+            }
+
+            alert("Login Successful!");
+            return true;
+        }
+
+        // Show/Hide Password Function
+        function togglePassword() {
+            let passwordField = document.getElementById("password");
+            let toggleIcon = document.getElementById("toggle-password");
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                toggleIcon.classList.remove("fa-eye");
+                toggleIcon.classList.add("fa-eye-slash");
+            } else {
+                passwordField.type = "password";
+                toggleIcon.classList.remove("fa-eye-slash");
+                toggleIcon.classList.add("fa-eye");
+            }
+        }
+
+        // Load Remember Me stored user
+        window.onload = function() {
+            let savedUser = localStorage.getItem("savedUser");
+            if (savedUser) {
+                document.getElementById("username").value = savedUser;
+                document.getElementById("remember-me").checked = true;
+            }
+        };
+    </script>
+
+    <style>
+        
+    </style>
+
+</head>
+<body>
+    <div class="container">
+        <div class="login-box">
+            <h2><i class="fa-solid fa-key"></i> Login</h2>
+            <form id="loginForm" onsubmit="return validateLogin(event)">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username" required>
+
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                    <i class="fa-solid fa-eye" id="toggle-password" onclick="togglePassword()"></i>
+                </div>
+
+                <div class="remember-me">
+                    <input type="checkbox" id="remember-me">
+                    <label for="remember-me">Remember Me</label>
+                </div>
+
+                <button type="submit" id="login-btn" class="login-btn">Login</button>
+            </form>
+            <p>Don't have an account? <a href="register.html">Register</a></p>
+        </div>
+    </div>
+</body>
+</html>
