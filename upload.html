@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Question Paper</title>
+    <link rel="stylesheet" href="uploadstyles.css">
+</head>
+<body>
+    <nav>
+        <button class="logout-btn">Logout</button>
+    </nav>
+
+    <h2>Upload Question Paper</h2>
+    <form id="uploadForm">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="title" placeholder="Enter Title" required>
+
+        <label for="branch">Branch</label>
+        <select id="branch" name="branch" required>
+            <option value="">Select Branch</option>
+            <option value="CSE">Computer Science Engineering</option>
+            <option value="ECE">Electronics and Communication Engineering</option>
+            <option value="EEE">Electronics and Electrical Engineering</option>
+            <option value="ME">Mechanical Engineering</option>
+            <option value="CE">Civil Engineering</option>
+            <option value="Aero">Aeronautical Engineering</option>
+        </select>
+
+        <label for="course">Course:</label>
+        <input type="text" id="course" name="course" placeholder="Enter Course" required>
+
+        <label for="courseId">Course ID:</label>
+        <input type="text" id="courseId" name="courseId" placeholder="Enter Course ID" required>
+
+        <label for="year">Year:</label>
+        <input type="number" id="year" name="year" placeholder="Enter Year" min="1900" max="2099" required>
+
+        <label for="file">File:</label>
+        <input type="file" id="file" name="file" required>
+
+        <label for="difficulty">Difficulty:</label>
+        <select id="difficulty" name="difficulty" required>
+            <option value="">Select difficulty level</option>
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+        </select>
+
+        <button type="submit" class="upload-btn">Upload</button>
+    </form>
+
+    <script>
+        document.getElementById("uploadForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form submission for validation
+
+            // Fetch form values
+            let title = document.getElementById("title").value.trim();
+            let subject = document.getElementById("subject").value;
+            let course = document.getElementById("course").value.trim();
+            let courseId = document.getElementById("courseId").value.trim();
+            let year = document.getElementById("year").value;
+            let file = document.getElementById("file").files.length;
+            let difficulty = document.getElementById("difficulty").value;
+
+            // Validation
+            if (!title || !subject || !course || !courseId || !year || file === 0 || !difficulty) {
+                alert("Please fill in all fields!");
+                return;
+            }
+
+            if (year < 1900 || year > 2099) {
+                alert("Please enter a valid year between 1900 and 2099.");
+                return;
+            }
+
+            alert("Question Paper Uploaded Successfully!");
+            document.getElementById("uploadForm").reset(); // Reset form after submission
+        });
+    </script>
+</body>
+</html>
